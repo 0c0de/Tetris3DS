@@ -94,8 +94,9 @@ void clearRow(int y){
 }
 
 //Decrease the next row when a row is completed
-void decreaseRow(int y){
-    for(int column = y; column <= 0; column--){
+void decreaseRow(){
+    printf("---> Decreasing rows...");
+    for(int column = 17; column > 0; column--){
         printf("\nCopying column %i to column %i", column - 1, column);
         for(int row = 1; row < 9; row++){
             printf("%i --> %i", gameTable[row][column], gameTable[row][column-1]);
@@ -103,12 +104,12 @@ void decreaseRow(int y){
         }
     }
 }
-
+ 
 void checkBoard(){
     for(int y = 0; y < 17; y++){
         if(isFull(y)){
             clearRow(y);
-            decreaseRow(y);
+            decreaseRow();
             y--;
         }
     }
