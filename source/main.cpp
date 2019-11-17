@@ -13,8 +13,8 @@
 int speedX = 0;
 int speedY = -1;
 
-int defaultXPos = 160;
-int defaultYPos = 0;
+int defaultXPos = 200;
+int defaultYPos = 30;
 
 int XPos = defaultXPos;
 int YPos = defaultYPos;
@@ -42,7 +42,6 @@ int main(int argc, char* argv[]) {
 	consoleInit(GFX_BOTTOM, NULL);
 
 	srand(time(0));
-	printf("Random Number: %i", (rand() % 4)+ 1);
 
 	// Create screens
 	C3D_RenderTarget* top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
@@ -82,10 +81,10 @@ int main(int argc, char* argv[]) {
 			}
 			
 		}else if (kDown & KEY_DUP){
+			direction = "ROTATING";
 			rotateIndex++;
-			if(!canMove()){
+			if(!canMove(direction)){
 				rotateIndex--;
-				UpdateGameTable();
 			}else{
 				UpdateGameTable();
 			}
@@ -106,14 +105,6 @@ int main(int argc, char* argv[]) {
 		DrawBoard();
 		drawGameTable();
 
-		if(!canMove()){
-			lockBlock();
-			
-			XPos = defaultXPos;
-			YPos = defaultYPos;
-			nextPiece(XPos, YPos);
-		}
-
 		drawSelectedPiece(XPos, YPos);
 		//Game Loop
 		if(osGetTime() > actualTime){
@@ -121,6 +112,14 @@ int main(int argc, char* argv[]) {
 			if(canMove()){
 				YPos+=10;
 				UpdateGameTable();
+			}
+
+			if(!canMove()){
+				lockBlock();
+				checkBoard();
+				XPos = defaultXPos;
+				YPos = defaultYPos;
+				nextPiece(XPos, YPos);
 			}
 			
 			printMatrixStatus();
