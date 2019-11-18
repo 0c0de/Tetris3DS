@@ -17,7 +17,8 @@ bool isInsideBorder(int x, int y, std::string dir = ""){
     }else if(dir == "RIGHT"){
         return (x < 8 && y < 17);
     }else if(dir == "ROTATING"){
-        return(x < 8 || x > 0);
+        printf("\nPosition X when rotating: %i", x);
+        return(x < 8 && x > 1);
     }else{
         return (y < 17 );
     }
@@ -94,23 +95,25 @@ void clearRow(int y){
 }
 
 //Decrease the next row when a row is completed
-void decreaseRow(){
-    printf("---> Decreasing rows...");
-    for(int column = 17; column > 0; column--){
-        printf("\nCopying column %i to column %i", column - 1, column);
+void decreaseRow(int y){
+    printf("\n---> Decreasing column %i...", y);
+    for(int column = y; column >= 0; column--){
         for(int row = 1; row < 9; row++){
-            printf("%i --> %i", gameTable[row][column], gameTable[row][column-1]);
-            gameTable[row][column] = gameTable[row][column-1];
+            if(column == 0){
+                gameTable[row][column] = 0;
+            }else{
+                gameTable[row][column] = gameTable[row][column-1];
+            }
         }
     }
 }
  
 void checkBoard(){
-    for(int y = 0; y < 17; y++){
+    for(int y = 16; y >= 0; y--){
         if(isFull(y)){
             clearRow(y);
-            decreaseRow();
-            y--;
+            decreaseRow(y);
+            y++;
         }
     }
 }

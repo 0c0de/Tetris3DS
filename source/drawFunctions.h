@@ -31,8 +31,8 @@ void DeInitAll(){
 
 //Draw the game board
 void DrawBoard(){
-    C2D_DrawRectangle(150, 0, 0, 80, 185, C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255));
-    C2D_DrawRectangle(155, 0, 0, 70, 180, C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255));
+    C2D_DrawRectangle(145, 0, 0, 90, 185, C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255));
+    C2D_DrawRectangle(150, 0, 0, 80, 180, C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255));
 }
 
 void DrawT(int x, int y, int blockPose){

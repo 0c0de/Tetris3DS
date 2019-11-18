@@ -13,13 +13,15 @@
 int speedX = 0;
 int speedY = -1;
 
-int defaultXPos = 200;
-int defaultYPos = 30;
+int defaultXPos = 180;
+int defaultYPos = 10;
 
 int XPos = defaultXPos;
 int YPos = defaultYPos;
 
 u64 actualTime = 0;
+
+u32 gameSpeed = 500;
 
 std::string direction;
 
@@ -48,7 +50,7 @@ int main(int argc, char* argv[]) {
 	C3D_RenderTarget* bottom = C2D_CreateScreenTarget(GFX_BOTTOM, GFX_LEFT);
 
 	//Init timer
-	actualTime = osGetTime() + 800;
+	actualTime = osGetTime() + gameSpeed;
 
 	initGame();
 
@@ -59,6 +61,8 @@ int main(int argc, char* argv[]) {
 		hidScanInput();
 		// Respond to user input
 		u32 kDown = hidKeysDown();
+		u32 kHeld = hidKeysHeld();
+
 		if (kDown & KEY_START){
 			break; // break in order to return to hbmenu
 
@@ -89,7 +93,13 @@ int main(int argc, char* argv[]) {
 				UpdateGameTable();
 			}
 			
+		}else if(kHeld & KEY_DDOWN){
+			gameSpeed = 50;
+
+		}else if(kDown & KEY_DDOWN){
+			gameSpeed = 50;
 		}else{
+			gameSpeed = 500;
 			direction = "";
 		}
 
@@ -123,7 +133,7 @@ int main(int argc, char* argv[]) {
 			}
 			
 			printMatrixStatus();
-			actualTime = osGetTime() + 500;
+			actualTime = osGetTime() + gameSpeed;
 		}else{
 			if(canMove()){
 				drawSelectedPiece(XPos, YPos);
