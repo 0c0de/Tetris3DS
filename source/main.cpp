@@ -103,9 +103,13 @@ int main(int argc, char* argv[]) {
 			direction = "";
 		}
 
+		if(isDead){
+			printf("You're dead bitch");
+		}
+
 
 		//printf("\x1b[10;15HTetris Game");
-		//printf("\x1b[11;20HScore");
+		//printf("\x1b[11;20HScore: %i", score);
 
 		// Render the scene
 		C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
@@ -114,17 +118,20 @@ int main(int argc, char* argv[]) {
 
 		DrawBoard();
 		drawGameTable();
+		
+		if(!isDead){
+			drawSelectedPiece(XPos, YPos);
+		}
 
-		drawSelectedPiece(XPos, YPos);
 		//Game Loop
-		if(osGetTime() > actualTime){
+		if(osGetTime() > actualTime && !isDead){
 			drawGameTable();
-			if(canMove()){
+			if(canMove("DOWN")){
 				YPos+=10;
 				UpdateGameTable();
 			}
 
-			if(!canMove()){
+			if(!canMove("DOWN")){
 				lockBlock();
 				checkBoard();
 				XPos = defaultXPos;
@@ -135,7 +142,7 @@ int main(int argc, char* argv[]) {
 			printMatrixStatus();
 			actualTime = osGetTime() + gameSpeed;
 		}else{
-			if(canMove()){
+			if(canMove() && !isDead){
 				drawSelectedPiece(XPos, YPos);
 			}
 		}

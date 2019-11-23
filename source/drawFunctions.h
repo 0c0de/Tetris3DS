@@ -468,7 +468,6 @@ void DrawI(int x, int y, int blockPose){
 void nextPiece(int x, int y){
     rotateIndex = 1;
     int numberGenerated = rand() % 7 + 1;
-	printf("Random number generated is: %i", numberGenerated);
 
     if(numberGenerated == 1){
         DrawL(x,y, rotateIndex);

@@ -3,6 +3,12 @@
 #include <string>
 #include <vector>
 
+//Global variable for score
+int score = 0;
+
+//Boolean variable to check if the game ended
+bool isDead = false;
+
 
 //Game size will be 90 by 190 but in will be 18 by 38 in real format for 3DS
 std::vector<std::vector<int>> gameTable(9, std::vector<int>(19));
@@ -10,8 +16,14 @@ std::vector<std::vector<int>> gameTable(9, std::vector<int>(19));
 //Array for store the blocks
 std::vector<std::vector<int>> block(4, std::vector<int>(2));
 
+//Adds score, to make it just more funny
+void addScore(int scoreToAdd){
+    score += scoreToAdd;
+}
+
 //Simple function to check if the blocks are inside the borders of the game table
 bool isInsideBorder(int x, int y, std::string dir = ""){
+
     if(dir == "LEFT"){
         return (x > 1 && y < 17);
     }else if(dir == "RIGHT"){
@@ -48,7 +60,12 @@ bool canMove(std::string direction = ""){
 void setBlockPosition(int gameX, int gameY, int valueToSet){
     gameX = (gameX/10)-14;
     gameY = (gameY/10);
-    gameTable[gameX][gameY] = valueToSet;
+    if(gameY < 0){
+        printf("\nYou're dead");
+        isDead = true;
+    }else{
+        gameTable[gameX][gameY] = valueToSet;
+    }
 }
 
 //Set the game table to 0, so all is empty
@@ -89,6 +106,7 @@ bool isFull(int y){
 
 //Make a score, then this is executed, just clean the row that is completed
 void clearRow(int y){
+    addScore(10);
     for(int x = 0; x < 9; x++ ){
         gameTable[x][y] = 0;
     }   
