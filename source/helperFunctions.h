@@ -9,6 +9,8 @@ int score = 0;
 //Boolean variable to check if the game ended
 bool isDead = false;
 
+//Store the number of the movements if it is moure than 1 then means that can move if not then game over bitch
+int movements = 0;
 
 //Game size will be 90 by 190 but in will be 18 by 38 in real format for 3DS
 std::vector<std::vector<int>> gameTable(9, std::vector<int>(19));
@@ -23,13 +25,11 @@ void addScore(int scoreToAdd){
 
 //Simple function to check if the blocks are inside the borders of the game table
 bool isInsideBorder(int x, int y, std::string dir = ""){
-
     if(dir == "LEFT"){
         return (x > 1 && y < 17);
     }else if(dir == "RIGHT"){
         return (x < 8 && y < 17);
     }else if(dir == "ROTATING"){
-        printf("\nPosition X when rotating: %i", x);
         return(x < 8 && x > 1);
     }else{
         return (y < 17 );
@@ -60,12 +60,7 @@ bool canMove(std::string direction = ""){
 void setBlockPosition(int gameX, int gameY, int valueToSet){
     gameX = (gameX/10)-14;
     gameY = (gameY/10);
-    if(gameY < 0){
-        printf("\nYou're dead");
-        isDead = true;
-    }else{
-        gameTable[gameX][gameY] = valueToSet;
-    }
+    gameTable[gameX][gameY] = valueToSet;
 }
 
 //Set the game table to 0, so all is empty
@@ -114,7 +109,6 @@ void clearRow(int y){
 
 //Decrease the next row when a row is completed
 void decreaseRow(int y){
-    printf("\n---> Decreasing column %i...", y);
     for(int column = y; column >= 0; column--){
         for(int row = 1; row < 9; row++){
             if(column == 0){
@@ -138,10 +132,15 @@ void checkBoard(){
 
 //Set state of the block to 1, so they are static
 void lockBlock(){
-    for(int x = 0; x < 4; x++){
-        int xPos = block[x][0];
-        int yPos = block[x][1] - 1;
-        setBlockPosition(xPos, yPos, 1);
+    if(movements <= 1){
+        isDead = true;
+    }else{
+        for(int x = 0; x < 4; x++){
+            int xPos = block[x][0];
+            int yPos = block[x][1] - 1;
+            setBlockPosition(xPos, yPos, 1);
+        }
+        movements = 0;
     }
 }
 

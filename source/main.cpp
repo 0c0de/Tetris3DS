@@ -94,44 +94,49 @@ int main(int argc, char* argv[]) {
 			}
 			
 		}else if(kHeld & KEY_DDOWN){
-			gameSpeed = 50;
-
+			gameSpeed = 30;
 		}else if(kDown & KEY_DDOWN){
-			gameSpeed = 50;
+			gameSpeed = 30;
+		}else if(kDown & KEY_A){
+			if(isDead){
+				isDead = false;
+			}
 		}else{
 			gameSpeed = 500;
 			direction = "";
 		}
 
-		if(isDead){
-			printf("You're dead bitch");
-		}
-
-
-		//printf("\x1b[10;15HTetris Game");
-		//printf("\x1b[11;20HScore: %i", score);
+		printf("\x1b[10;15HTetris Game");
+		printf("\x1b[12;15HScore: %i", score);
 
 		// Render the scene
 		C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
 		C2D_TargetClear(top, clrColor);
 		C2D_SceneBegin(top);
-
-		DrawBoard();
-		drawGameTable();
 		
+		if(isDead){
+			//printf("\nYou're dead bitch");
+			InitGameTable();
+			score = 0;
+			drawText("GAME OVER\nPress  to restart the game\nPress start to exit", SCREEN_WIDTH / 6.0f, SCREEN_HEIGHT / 2.25f, 0.6f);
+		}
+
 		if(!isDead){
-			drawSelectedPiece(XPos, YPos);
+			drawSelectedPiece(XPos, YPos);	
+			DrawBoard();
+			drawGameTable();
 		}
 
 		//Game Loop
 		if(osGetTime() > actualTime && !isDead){
 			drawGameTable();
-			if(canMove("DOWN")){
+			if(canMove()){
 				YPos+=10;
 				UpdateGameTable();
+    			movements++;
 			}
 
-			if(!canMove("DOWN")){
+			if(!canMove()){
 				lockBlock();
 				checkBoard();
 				XPos = defaultXPos;
@@ -139,7 +144,7 @@ int main(int argc, char* argv[]) {
 				nextPiece(XPos, YPos);
 			}
 			
-			printMatrixStatus();
+			//printMatrixStatus();
 			actualTime = osGetTime() + gameSpeed;
 		}else{
 			if(canMove() && !isDead){

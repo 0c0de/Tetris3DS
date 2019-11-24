@@ -8,7 +8,7 @@
 #include <vector>
 
 //Color to fill the entire screen when updates graphics
-u32 clrColor = C2D_Color32(0,0,0,255);
+u32 clrColor = C2D_Color32(255,255,255,255);
 
 //Boolean to detect which figure is spawned
 bool isL,isO,isZ,isI,isT, isLInverted, isZInverted = false;
@@ -32,7 +32,7 @@ void DeInitAll(){
 //Draw the game board
 void DrawBoard(){
     C2D_DrawRectangle(145, 0, 0, 90, 185, C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255), C2D_Color32(66, 245, 114, 255));
-    C2D_DrawRectangle(150, 0, 0, 80, 180, C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255), C2D_Color32(0,0,0,255));
+    C2D_DrawRectangle(150, 0, 0, 80, 180, C2D_Color32(255,255,255,255), C2D_Color32(255,255,255,255), C2D_Color32(255,255,255,255), C2D_Color32(255,255,255,255));
 }
 
 void DrawT(int x, int y, int blockPose){
@@ -177,12 +177,12 @@ void DrawLInverted(int x, int y, int blockPose){
         C2D_DrawRectSolid(x, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[0][0] = x;
         block[0][1] = y;
-        C2D_DrawRectSolid(x, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x;
-        block[1][1] = y+10;
-        C2D_DrawRectSolid(x, y+20, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[1][1] = y-10;
+        C2D_DrawRectSolid(x, y-20, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[2][0] = x;
-        block[2][1] = y+20;
+        block[2][1] = y-20;
         C2D_DrawRectSolid(x-10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[3][0] = x-10;
         block[3][1] = y;
@@ -193,12 +193,12 @@ void DrawLInverted(int x, int y, int blockPose){
         C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x;
         block[1][1] = y-10;
-        C2D_DrawRectSolid(x-10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[2][0] = x-10;
+        C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][0] = x+10;
         block[2][1] = y;
-        C2D_DrawRectSolid(x-20, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[3][0] = x-20;
-        block[3][1] = y; 
+        C2D_DrawRectSolid(x+20, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[3][0] = x+20;
+        block[3][1] = y;
     }else if(blockPose == 3){
         C2D_DrawRectSolid(x, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[0][0] = x;
@@ -206,21 +206,21 @@ void DrawLInverted(int x, int y, int blockPose){
         C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x+10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        C2D_DrawRectSolid(x, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[2][0] = x;
-        block[2][1] = y-10;
-        C2D_DrawRectSolid(x, y-20, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][1] = y+10;
+        C2D_DrawRectSolid(x, y+20, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[3][0] = x;
-        block[3][1] = y-20;
+        block[3][1] = y+20;
     }else if(blockPose == 4){
         C2D_DrawRectSolid(x, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[0][0] = x;
         block[0][1] = y;
-        C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[1][0] = x+10;
+        C2D_DrawRectSolid(x-10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[1][0] = x-10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x+20, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[2][0] = x+20;
+        C2D_DrawRectSolid(x-20, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][0] = x-20;
         block[2][1] = y;
         C2D_DrawRectSolid(x, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[3][0] = x;
@@ -267,11 +267,11 @@ void DrawZ(int x, int y, int blockPose){
         C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x+10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x+10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[2][0] = x+10;
+        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][0] = x;
         block[2][1] = y-10;
-        C2D_DrawRectSolid(x+20, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[3][0] = x+20;
+        C2D_DrawRectSolid(x-10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[3][0] = x-10;
         block[3][1] = y-10;
     }
     if(blockPose == 2){
@@ -281,12 +281,12 @@ void DrawZ(int x, int y, int blockPose){
         C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x+10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        C2D_DrawRectSolid(x, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[2][0] = x;
-        block[2][1] = y-10;
-        C2D_DrawRectSolid(x+10, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][1] = y+10;
+        C2D_DrawRectSolid(x+10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[3][0] = x+10;
-        block[3][1] = y+10;
+        block[3][1] = y-10;
     }
     if (blockPose == 3){
         C2D_DrawRectSolid(x, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
@@ -295,11 +295,11 @@ void DrawZ(int x, int y, int blockPose){
         C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x+10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x+10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[2][0] = x+10;
+        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][0] = x;
         block[2][1] = y-10;
-        C2D_DrawRectSolid(x+20, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[3][0] = x+20;
+        C2D_DrawRectSolid(x-10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[3][0] = x-10;
         block[3][1] = y-10;
     }
     if (blockPose == 4){
@@ -309,12 +309,12 @@ void DrawZ(int x, int y, int blockPose){
         C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x+10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        C2D_DrawRectSolid(x, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[2][0] = x;
-        block[2][1] = y-10;
-        C2D_DrawRectSolid(x+10, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][1] = y+10;
+        C2D_DrawRectSolid(x+10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[3][0] = x+10;
-        block[3][1] = y+10;
+        block[3][1] = y-10;
     }
 
     if(blockPose >= 5){
@@ -337,25 +337,25 @@ void DrawZInverted(int x, int y, int blockPose){
         C2D_DrawRectSolid(x-10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x-10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x-10, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[2][0] = x-10;
-        block[2][1] = y+10;
-        C2D_DrawRectSolid(x-20, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[3][0] = x-20;
-        block[3][1] = y+10;
+        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][0] = x;
+        block[2][1] = y-10;
+        C2D_DrawRectSolid(x+10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[3][0] = x+10;
+        block[3][1] = y-10;
     }
     if(blockPose == 2){
         C2D_DrawRectSolid(x, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[0][0] = x;
         block[0][1] = y;
-        C2D_DrawRectSolid(x-10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[1][0] = x-10;
+        C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[1][0] = x+10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[2][0] = x;
+        C2D_DrawRectSolid(x+10, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][0] = x+10;
         block[2][1] = y+10;
-        C2D_DrawRectSolid(x-10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[3][0] = x-10;
+        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[3][0] = x;
         block[3][1] = y-10;
     }
     if (blockPose == 3){
@@ -365,25 +365,25 @@ void DrawZInverted(int x, int y, int blockPose){
         C2D_DrawRectSolid(x-10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[1][0] = x-10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x-10, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[2][0] = x-10;
-        block[2][1] = y+10;
-        C2D_DrawRectSolid(x-20, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[3][0] = x-20;
-        block[3][1] = y+10;
+        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][0] = x;
+        block[2][1] = y-10;
+        C2D_DrawRectSolid(x+10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[3][0] = x+10;
+        block[3][1] = y-10;
     }
     if (blockPose == 4){
         C2D_DrawRectSolid(x, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
         block[0][0] = x;
         block[0][1] = y;
-        C2D_DrawRectSolid(x-10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[1][0] = x-10;
+        C2D_DrawRectSolid(x+10, y, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[1][0] = x+10;
         block[1][1] = y;
-        C2D_DrawRectSolid(x, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[2][0] = x;
+        C2D_DrawRectSolid(x+10, y+10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[2][0] = x+10;
         block[2][1] = y+10;
-        C2D_DrawRectSolid(x-10, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
-        block[3][0] = x-10;
+        C2D_DrawRectSolid(x, y-10, 1, 10,10, C2D_Color32(66, 245, 114, 255));
+        block[3][0] = x;
         block[3][1] = y-10;
     }
 
@@ -502,4 +502,13 @@ void drawSelectedPiece(int x, int y){
     }else if(isZInverted){
         DrawZInverted(x,y,rotateIndex);
     }
+}
+
+//Functions to draw text 
+void drawText(std::string text, float x, float y, float fontSize){
+    C2D_Text myText[3];
+    C2D_TextBuf buffer = C2D_TextBufNew(4096);
+    C2D_TextParse(&myText[0], buffer, text.c_str());
+    C2D_TextOptimize(&myText[0]);
+    C2D_DrawText(&myText[0], C2D_AtBaseline | C2D_WithColor, x, y, 0.5f, fontSize, fontSize, C2D_Color32(66, 245, 114, 255));
 }
